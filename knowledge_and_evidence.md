@@ -124,11 +124,11 @@ python3 main.py
 
 3. Examine the code for `smiley.py`, `sad.py`, and `happy.py`. Give an example of each of the following control structures using an example from **each** of these files. Include the first line and the line range:
 
-   | Control Flow | File      | First line | Line range |
-   | ------------ |-----------|------------|------------|
-   |  sequence    | smiley.py | 15         | 11         |
-   |  selection   | happy.py  | 31         | 1          |
-   |  iteration   | sad.py    | 16         | 2          |
+   | Control Flow | File      | First line                  | Line range |
+   | ------------ |-----------|-----------------------------|------------|
+   |  sequence    | smiley.py | self.sense_hat = SenseHat() | 14-27      |
+   |  selection   | happy.py  | self.pixels[pixel] = self.BLACK if wide_open else self.complexion()| 31|
+   |  iteration   | sad.py    | for pixel in mouth:| 18-19      |
 
 4. Though everything in Python is an object, it is sometimes said to have four "primitive" types. Examining the three files `smiley.py`, `sad.py`, and `happy.py`, identify which of the following types are used in any of these files, and give an example of each (use an example from the code, if applicable, otherwise provide an example of your own):
 
@@ -265,12 +265,12 @@ Unlike the `Happy` smiley, the current implementation of the `Sad` smiley does n
 3. Referring to the implementation of blink in the Happy and Sad Smiley classes, give a brief explanation of what polymorphism is.
 
 > Your answer here
-> The Sad class does not inherit from the Blinkable class; therefore, there is no polymorphic behaviour. However, if the Sad class were to inherit from the Blinkable class and implement a blink method with a different implementation, we could say there is polymorphic behaviour, as the same blink method would result in different behaviours when called.
+> The Sad class does not inherit from the Blinkable class; therefore, there is no polymorphic behaviour. However, if the Sad class were to inherit from the Blinkable class and implement a blink method with a different implementation, we could say there is polymorphic behaviour, as the same blink method would act differently depending on the object that is calling it. 
 
 4. How is inheritance used in the blink method, and why is it important for polymorphism?
 
 > Your answer here
-> Inheritance is important for polymorphism because, to implement the polymorphic behaviour of a method, you must first inherit from the class.
+> Inheritance is important for polymorphism because, to implement the polymorphic behaviour of a method, you must first inherit from the class. Inheritance allows its subclasses to inherit from its super class which defines the method. When you call the method, it runs the implementation based on the object's class, and you get different behaviours. 
 1. **Implement Blink in Sad Class:**
 
    - Create a new method called `blink` within the Sad class. Ensure you use the same method signature as in the Happy class:
@@ -302,23 +302,27 @@ Include a screenshot of the sad smiley or the modified `main.py`:
   1. **Class Type Analysis:** What kind of class is `Blinkable`? Inspect its superclass for clues about its classification.
 
      > Your answer here
-> Abstract class.
+     > Abstract class.
 
   2. **Class Implementation:** `Blinkable` is a class intended to be implemented by other classes. What generic term describes this kind of class, which is designed for implementation by others? **Clue**: Notice the lack of any concrete implementation and the naming convention.
 
   > Your answer here
+  > Abstract class.
 
   3. **OO Principle Identification:** Regarding your answer to question (2), which Object-Oriented (OO) principle does this represent? Choose from the following and justify your answer in 1-2 sentences: Abstraction, Polymorphism, Inheritance, Encapsulation.
 
   > Your answer here
+  > Abstraction. Abstraction defines a class that provides methods without implementation details. It depends on the subclass to implement the abstract methods.
 
   4. **Implementation Flexibility:** Explain why you could grant the Sad Smiley a blinking feature similar to the Happy Smiley's implementation, even without directly using `Blinkable`.
 
   > Your answer here
+  > Because each class can have its own method. If you add a blink method to the Sad class, it’s just a separate method that doesn't have to follow the rules of the Blinkable class. It may look like the same feature, but it's actually not linked to Blinkable at all. It's just another method with the same name.
 
   5. **Concept and Language Specificity:** In relation to your response to question (4), what is this capability known as, and why is it feasible in Python and many other dynamically typed languages but not in most statically typed programming languages like C#? **Clue** This concept is hinted at in the title of this section.
 
   > Your answer here
+  > Duck typing. In dynamically type languages like python, type checking happens at runtime, so you can pass around objects without declaring the exact type like statically typed languages. This allows you to use an object based on its methods and attributes instead of its type. If an abject acts like a certain type, it can be treated as that type. 
 
   ***
 
@@ -332,18 +336,23 @@ Include a screenshot of the sad smiley or the modified `main.py`:
 
      1. Which colors are defined and in which class(s)?
         > Your answer here
+        > White, green, red, yellow and black colours are defined in the Smiley class.
+
      2. What type of variables hold these colors? Are the values expected to change during the program's execution? Explain your answer.
         > Your answer here
+        > Tuple. No. Because they are declared in all capitals, which in python convention is used for constants.  Constants suggests that these variables represents fixed values.
      3. Add the color blue to the appropriate class using the appropriate format and values.
 
   2. **Usage of Color Variables:**
 
      1. In which classes are the color variables used?
         > Your answer here
+        > Smiley, Happy and Sad classes.
 
   3. **Simple Method to Change Colors:**
   4. What is the easiest way you can think to change the smileys to green? Easiest, not necessarily the best!
      > Your answer here
+     > Change the 'Y' value inside the constructor of the Smiley class to 'self.Green'.
 
   Here's a revised version of the "Flexible Colors – Step 1" section for the smiley project, incorporating your specifications for formatting and content updates:
 
@@ -373,7 +382,7 @@ Include a screenshot of the sad smiley or the modified `main.py`:
 
   4. **Bulk rename:** We want to update our grid to use the value of complexion, but we have so many `Y`'s in the grid. Use your IDE's refactoring tool to rename all instances of the **symbol** `Y` to `X`. Where `X` is the value of the `complexion` variable. Include a screenshot evidencing you have found the correct refactor tool and the changes made.
 
-  ![Bulk Rename](screenshots/bulk_rename.png)
+  ![Bulk Rename](/docs/screenshots/bulk_rename.png)
 
   5. **Update the `complexion` method:** Adjust this method to return `self.my_complexion`, ensuring that whatever color is assigned during instantiation is what the smiley displays.
 
